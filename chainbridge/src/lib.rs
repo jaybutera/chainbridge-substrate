@@ -97,8 +97,8 @@ impl<AccountId, BlockNumber: Default> Default for ProposalVotes<AccountId, Block
     }
 }
 
-pub trait Trait: system::Trait {
-    type Event: From<Event<Self>> + Into<<Self as frame_system::Trait>::Event>;
+pub trait Trait: system::Config {
+    type Event: From<Event<Self>> + Into<<Self as frame_system::Config>::Event>;
     /// Origin used to administer the pallet
     type AdminOrigin: EnsureOrigin<Self::Origin>;
     /// Proposed dispatchable call
@@ -111,7 +111,7 @@ pub trait Trait: system::Trait {
 }
 
 decl_event! {
-    pub enum Event<T> where <T as frame_system::Trait>::AccountId {
+    pub enum Event<T> where <T as frame_system::Config>::AccountId {
         /// Vote threshold has changed (new_threshold)
         RelayerThresholdChanged(u32),
         /// Chain now available for transfers (chain_id)
